@@ -1,4 +1,4 @@
-package br.com.simian.resource.handler;
+package br.com.simian.resource.exception.handler;
 
 import java.util.Date;
 
