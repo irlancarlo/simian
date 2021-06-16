@@ -1,25 +1,37 @@
 package br.com.simian.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.simian.domain.Dna;
+import br.com.simian.domain.Population;
 import br.com.simian.dto.DnaDTO;
+import br.com.simian.repository.DnaRepository;
 
 @Service
 public class SimianService {
 	
-	public boolean isSimian(DnaDTO dna) {
+	@Autowired
+	private DnaRepository dnaRepository;
+	
+	public boolean isSimian(DnaDTO dnaDTO) {
 		
-		return false;
+		Population dna = new Population();
+		dna.setSimian(false);
+	
+		
+		dnaRepository.save(dna);
+		return dna.isSimian();
 	}
 	
-	public Dna findStats() {
-		Dna dna = new Dna();
-		dna.setCountHumanDna(100);
-		dna.setCountMutantDna(40);
-		double ratio = (double) dna.getCountMutantDna()/dna.getCountHumanDna();
-		dna.setRatio(ratio);
-		return dna;
+	public List<Population> findStats() {
+		Population dna = new Population();
+		
+		List<Population> findAll = dnaRepository.findAll();
+	
+		return findAll;
 	}
 
 }

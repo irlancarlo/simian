@@ -1,16 +1,21 @@
 package br.com.simian.resource;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.simian.domain.Dna;
+import br.com.simian.domain.Population;
 import br.com.simian.dto.DnaDTO;
+import br.com.simian.resource.exception.UnsupportedDNAException;
 import br.com.simian.service.SimianService;
 
 @RestController
@@ -20,18 +25,19 @@ public class SimianResource {
 	@Autowired
 	private SimianService simianService;
 
-	@RequestMapping(value = "simian", method = RequestMethod.POST, 
-			consumes = MediaType.APPLICATION_JSON_VALUE, 
-			produces = MediaType.APPLICATION_JSON_VALUE)
-	public void isSimian(@RequestBody DnaDTO dna) {
+	@PostMapping(value = "/simian")
+	public ResponseEntity<?> isSimian(@RequestBody DnaDTO dna) {
 		
-		simianService.isSimian(dna);
+		if(!simianService.isSimian(dna)) {
+			throw new UnsupportedDNAException("Humano");
+		}
 		
+		return ResponseEntity.ok().build();		
 	}
 	
 
-	@RequestMapping(value = "/stats", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Dna findStatsDna() {
+	@GetMapping(value = "/stats")
+	public List<Population> findStatsDna() {
 		return simianService.findStats();
 	}
 
