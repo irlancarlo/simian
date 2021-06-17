@@ -8,8 +8,8 @@ public class UnsupportedDNAException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
-	public UnsupportedDNAException(String exception) {
-		super(exception);
+	public UnsupportedDNAException() {
+		super();
 	}
 
 }

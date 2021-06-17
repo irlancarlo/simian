@@ -26,7 +26,7 @@ public class SimianResource {
 	public ResponseEntity<?> isSimian(@RequestBody DnaDTO dna) {
 		
 		if(!simianService.isSimian(dna)) {
-			throw new UnsupportedDNAException("Humano");
+			throw new UnsupportedDNAException();
 		}
 		
 		return ResponseEntity.ok().build();		
