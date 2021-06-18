@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.FORBIDDEN)
 public class UnsupportedDNAException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
-	
-	public UnsupportedDNAException() {
-		super();
-	}
+    private static final long serialVersionUID = 1L;
+
+    public UnsupportedDNAException() {
+        super();
+    }
 
 }

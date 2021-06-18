@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class StatsDTO {
-	
-	private int countMutantDna;
-	private int countHumaDna;
-	private double ratio;
+
+    private int countMutantDna;
+    private int countHumaDna;
+    private double ratio;
 
 }

@@ -68,7 +68,7 @@ public class DnaServiceTest {
 	@Test
 	public void testSearchVerticalDNABeginDNA() {
 
-		List<String> dna = Arrays.asList("CTGAGA", "CTATGC", "TATTGT", "AGAGGG", "CCCCTA", "TCACTG");
+		List<String> dna = Arrays.asList("CTGAGA", "CTATGC", "TATTGT", "AGAGGG", "XXXXTA", "TCACTG");
 		Assert.assertTrue(dnaService.isSimian(dna));
 
 	}
@@ -92,7 +92,7 @@ public class DnaServiceTest {
 	@Test
 	public void testSearchDiagonalDNABeginDNA() {
 
-		List<String> dna = Arrays.asList("CTGAGA", "CTATGC", "TATTGT", "AGAGGG", "CCCCTA", "TCACTG");
+		List<String> dna = Arrays.asList("CTGAVA", "CTATVC", "TATTVT", "AGAGGG", "BBBBTA", "TCACTG");
 		Assert.assertTrue(dnaService.isSimian(dna));
 
 	}
