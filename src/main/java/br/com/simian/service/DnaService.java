@@ -1,87 +1,82 @@
 package br.com.simian.service;
 
-import java.util.List;
-
+import br.com.simian.service.enums.SequenceDNA;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DnaService {
 
-	public boolean isSimian(List<String> dna) {
+    public boolean isSimian(List<String> dna) {
 
-		if (searchHorizontalDNA(dna) || searchVerticalDNA(dna) || searchDiagonalDNA(dna)) {
-			return true;
-		}
+        if (searchHorizontalDNA(dna) || searchVerticalDNA(dna) || searchDiagonalDNA(dna)) {
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	private boolean hasSequence(String sequence) {
+    private boolean hasSequence(String sequence) {
 
-		return sequence.contains("AAAA") || sequence.contains("GGGG") || sequence.contains("CCCC")
-				|| sequence.contains("TTTT");
-	}
+        for (SequenceDNA sequenceDNA : SequenceDNA.values()) {
+            if (sequence.contains(sequenceDNA.name())) {
+                return true;
+            }
+        }
 
-	private boolean searchHorizontalDNA(List<String> dna) {
-		for (String row : dna) {
-			if (hasSequence(row)) {
-				System.out.println("palavra: " + row);
-				return true;
-			}
-		}
-		return false;
-	}
+        return false;
+    }
 
-	private boolean searchVerticalDNA(List<String> grid) {
+    private boolean searchHorizontalDNA(List<String> dna) {
+        for (String row : dna) {
+            if (hasSequence(row)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-		StringBuilder word;
+    private boolean searchVerticalDNA(List<String> dna) {
 
-		for (int col = 0; col < grid.get(0).length(); col++) {
+        StringBuilder word;
 
-			word = new StringBuilder();
+        for (int col = 0; col < dna.get(0).length(); col++) {
 
-			for (int row = 0; row < grid.size(); row++) {
-				char colChar = grid.get(row).charAt(col);
+            word = new StringBuilder();
 
-				word.append(colChar);
+            for (int row = 0; row < dna.size(); row++) {
+                char colChar = dna.get(row).charAt(col);
+                word.append(colChar);
 
-			}
+                if (hasSequence(word.toString())) {
+                    return true;
+                }
+            }
+        }
 
-			if (hasSequence(word.toString())) {
-				return true;
-			}
+        return false;
+    }
 
-		}
+    private boolean searchDiagonalDNA(List<String> dna) {
 
-		return false;
-	}
+        StringBuilder word;
+        for (int col = dna.get(0).length(); col > 0; col--) {
 
-	private boolean searchDiagonalDNA(List<String> grid) {
+            word = new StringBuilder();
 
-		StringBuilder word = new StringBuilder();
-		for (int i = 6; i > 0; i--) {
+            for (int row = 0, diagonal = col; row < dna.size() && diagonal > 0; row++, diagonal--) {
 
-			word = new StringBuilder();
+                char colChar = dna.get(row).charAt(diagonal - 1);
+                word.append(colChar);
 
-			for (int k = 0, l = i; k < 6 && l > 0; k++, l--) {
-				char colChar = grid.get(k).charAt(l - 1);
+                if (hasSequence(word.toString())) {
+                    return true;
+                }
+            }
+        }
 
-				if (word.length() == 0 || word.lastIndexOf(String.valueOf(colChar)) >= 0) {
-					word.append(colChar);
-				} else {
-					word = new StringBuilder();
-					word.append(colChar);
-				}
-
-				if (word.length() == 4) {
-					System.out.println("palavra: " + word);
-					return true;
-				}
-			}
-
-		}
-
-		return false;
-	}
+        return false;
+    }
 
 }
