@@ -1,7 +1,5 @@
 package br.com.simian.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,21 +7,30 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-
-@Data
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "population")
-public class Population implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+@Table
+public class Stats {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "is_simian", nullable = false)
-	private boolean isSimian;	
+	private boolean isSimian;
+	
+	@Column(unique = true)
+	private String dna; 
+
+	public Stats(boolean isSimian, String dna) {
+		this.isSimian = isSimian;
+		this.dna = dna;
+	}
 
 }

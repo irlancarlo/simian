@@ -3,9 +3,9 @@ package br.com.simian.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.simian.domain.Population;
+import br.com.simian.domain.Stats;
 
 @Repository
-public interface DnaRepository extends JpaRepository<Population, Long> {
+public interface StatsRepository extends JpaRepository<Stats, Long> {
 
 }

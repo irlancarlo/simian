@@ -1,4 +1,4 @@
-package br.com.simian.resource.exception;
+package br.com.simian.exception;
 
 import java.io.Serializable;
 import java.util.Date;

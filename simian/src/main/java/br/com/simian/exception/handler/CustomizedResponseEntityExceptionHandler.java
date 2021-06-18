@@ -1,4 +1,4 @@
-package br.com.simian.resource.exception.handler;
+package br.com.simian.exception.handler;
 
 import java.util.Date;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.simian.resource.exception.ExceptionResponse;
-import br.com.simian.resource.exception.UnsupportedDNAException;
+import br.com.simian.exception.ExceptionResponse;
+import br.com.simian.exception.UnsupportedDNAException;
 
 @ControllerAdvice
 @RestController
